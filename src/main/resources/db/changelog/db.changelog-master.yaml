@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - ChangeSet:
+    id: 1
+    author: Goraj
+    include:
+      file: db/changelog/schema/001-init-db.sql
+  - ChangeSet:
+    id: 2
+    author: Goraj
+    include:
+      file: db/changelog/schema/002-init-db.sql
