@@ -1,1 +1,16 @@
+pluginManagement {
+    repositories {
+        maven {
+            url "https://nexus.rbinternational.corp/nexus/repository/public"
+        }
+        mavenCentral()
+        gradlePluginPortal()
+        google()
+    }
+}
+
 rootProject.name = 'library'
+include 'library-data'
+include 'library-service'
+include 'library-gui'
+include 'library-app'

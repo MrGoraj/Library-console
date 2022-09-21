@@ -2,6 +2,6 @@
 
 echo "Uruchamianie aplikacji"
 
-cd build/libs || exit
+cd library-app/build/libs || exit
 
-java -jar library-0.0.1-SNAPSHOT.jar
+java -jar library-app-0.0.1-SNAPSHOT.jar

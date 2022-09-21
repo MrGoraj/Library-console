@@ -1,23 +1,20 @@
 buildscript {
     ext {
-        springBootVersion = '2.7.3'
+        springBootVersion = '2.7.7'
     }
     repositories {
-        mavenLocal()
         maven {
-            url "https://nexus.rbinternational.corp/nexus/repository/public"    }
+            url "https://nexus.rbinternational.corp/nexus/repository/public"
+        }
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-starter:${springBootVersion}")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "org.postgresql:postgresql:42.4.2"
-        classpath "org.liquibase:liquibase-gradle-plugin:2.1.1"
-        classpath "org.yaml:snakeyaml:1.31"
     }
 }
 
-apply plugin: 'org.liquibase.gradle'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
@@ -26,31 +23,20 @@ group = 'pl.com.rbinternational'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
-    mavenLocal()
-    maven {
-        url "https://nexus.rbinternational.corp/nexus/repository/public"   }
+    maven { url "https://nexus.rbinternational.corp/nexus/repository/public" }
+    maven { url "https://plugins.gradle.org/m2/" }
     mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.liquibase:liquibase-core'
-    implementation 'org.postgresql:postgresql'
-    implementation 'org.yaml:snakeyaml'
-    liquibaseRuntime 'org.liquibase:liquibase-core'
-    liquibaseRuntime 'org.postgresql:postgresql'
-    liquibaseRuntime 'org.yaml:snakeyaml'
-    liquibaseRuntime 'info.picocli:picocli:4.6.3'
 }
 
-liquibase {
-    activities {
-        main {
-            classPath "src/main/resources/"
-            changeLogFile "db/changelog/db.changelog-master.yaml"
-            url project.hasProperty("url")?project.getProperty("url"):"jdbc:postgresql://localhost:5432/postgres"
-            username project.hasProperty("username")?project.getProperty("username"):"admin"
-            password project.hasProperty("password")?project.getProperty("password"):"admin"
-        }
-    }
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }
